@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Frontend System Design Fundamentals</title>
-    <link rel="stylesheet" href="./index.css">
-</head>
-<body>
-<main id="container"></main>
-</body>
-<script>
-    const container = document.getElementById('container');
-    const html = `<article class="card">
-    <h3 class="card__title"></h3>
-    <div class="card__body">
-      <div class='card__body__image'></div>
-      <section class='card__body__content'>
-      </section>
-    </div>
-  </article>`;
+    <link rel="stylesheet" href="./index.css" />
+    <template id="card">
+      <article class="card">
+        <h3 class="card__title"></h3>
+        <div class="card__body">
+          <div class="card__body__image"></div>
+          <section class="card__body__content"></section>
+        </div>
+      </article>
+    </template>
+  </head>
+  <body>
+    <main id="container"></main>
+  </body>
+  <script>
+    const cardTemplate = document.getElementById("card");
+    const container = document.getElementById("container");
 
     /**
      * @param {string} title
@@ -26,14 +28,22 @@
      * @return {HTMLElement
      */
     function createCardComponent(title, body) {
-        // @todo - Implement function
+      const card = cardTemplate.content.cloneNode(true);
+      const titleElement = card.querySelector(".card__title");
+      const bodyElement = card.querySelector(".card__body__content");
+
+      titleElement.textContent = title;
+      bodyElement.textContent = body;
+
+      return card;
+      // @todo - Implement function
     }
 
     const component = createCardComponent(
-        "Frontend System Design: Fundamentals",
-        "This is a random body text"
+      "Frontend System Design: Fundamentals",
+      "This is a random body text"
     );
 
     container.appendChild(component);
-</script>
+  </script>
 </html>
