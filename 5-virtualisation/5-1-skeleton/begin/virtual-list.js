@@ -1,4 +1,4 @@
-import {intersectionObserver} from "../../../utils/observer.js";
+import { intersectionObserver } from "../../../utils/observer.js";
 
 /**
  * Standard Margin between cards
@@ -44,7 +44,7 @@ function y(element, value = undefined) {
         element?.setAttribute('data-y', value);
     }
     const y = element?.getAttribute('data-y');
-    if(y !== '' && y != null && +y === +y) {
+    if (y !== '' && y != null && +y === +y) {
         return +y;
     }
     return null;
@@ -73,7 +73,7 @@ export class VirtualList {
      * }}
      */
     constructor(root, props) {
-        this.props = {...props};
+        this.props = { ...props };
         this.root = root;
     }
 
@@ -86,11 +86,13 @@ export class VirtualList {
      * @returns {string}
      */
     toHTML() {
-        /**
-         * Part 1 - App Skeleton
-         *  @todo
-         */
-        return ``.trim();
+
+
+        return `<div id='container'>
+            <div id='top-observer'></div>
+            <div id='virtual-list'></div>
+            <div id='bottom-observer'></div>
+        </div>`.trim();
     }
 
     /**
@@ -111,11 +113,11 @@ export class VirtualList {
      * Handles observer intersection entries
      * @param entries {IntersectionObserverEntry[]}
      */
-    #handleIntersectionObserver(entries) {}
+    #handleIntersectionObserver(entries) { }
 
-    async #handleBottomObserver() {}
+    async #handleBottomObserver() { }
 
-    async #handleTopObserver() {}
+    async #handleTopObserver() { }
 
     /**
      * Function uses `props.getTemplate` to update the html elements
