@@ -48,12 +48,15 @@ export class VirtualList {
      * @returns void
      */
     #effect() {
-        new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 console.log(entry)
                 this.#handleIntersectionObserver(entry)
             })
         }, { threshold: 0.2 });
+
+        observer.observe(document.getElementById('top-observer'))
+        observer.observe(document.getElementById('bottom-observer'))
     }
 
     handleTopObserver() {
