@@ -14,8 +14,17 @@ export class VirtualList {
      * @param props {{}}
      */
     constructor(root, props) {
-        this.props = {...props};
+        this.props = { ...props };
         this.root = root;
+    }
+    #handleIntersectionObserver(entry) {
+        const id = entry.target.id;
+
+        if (id === 'top-observer') {
+            this.handleTopObserver()
+        } else if (id === 'bottom-observer') {
+            this.handleBottomObserver()
+        }
     }
 
     /**
@@ -38,7 +47,22 @@ export class VirtualList {
      * Registers Events / Observers, this function is run after initial render
      * @returns void
      */
-    #effect() {}
+    #effect() {
+        new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                console.log(entry)
+                this.#handleIntersectionObserver(entry)
+            })
+        }, { threshold: 0.2 });
+    }
+
+    handleTopObserver() {
+        console.log('Top Observer')
+    }
+
+    handleBottomObserver() {
+        console.log('Bottom Observer')
+    }
 
     /**
      * Renders the content to the provided root container and runs
